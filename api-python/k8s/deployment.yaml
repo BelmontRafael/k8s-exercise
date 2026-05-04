@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-python-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-python
+  template:
+    metadata:
+      labels:
+        app: api-python
+    spec:
+      containers:
+      - name: api-python
+        image: api-python:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: DATABASE_URL
