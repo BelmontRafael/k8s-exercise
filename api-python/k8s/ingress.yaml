@@ -2,6 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: api-python-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: default-limite-conexoes-simultaneas@kubernetescrd
 spec:
   rules:
   - http:
